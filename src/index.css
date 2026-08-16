@@ -1,0 +1,156 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@layer base {
+  :root {
+    --bg: #F5F4F1;
+    --surface: #FFFFFF;
+    --surface-hover: #EBE9E4;
+    --border: #D8D6D0;
+    --text: #16171A;
+    --text-muted: #5C6069;
+    --accent: #FF6B35;
+    --accent-hover: #E05523;
+    --accent-danger: #E5342B;
+    --accent-warning: #D97706;
+    --accent-success: #16A34A;
+    --accent-glow: rgba(255, 107, 53, 0.15);
+  }
+
+  .dark {
+    --bg: #0A0B0D;
+    --surface: #151719;
+    --surface-hover: #1E2125;
+    --border: #2A2D31;
+    --text: #E8E9EA;
+    --text-muted: #8E939D;
+    --accent: #FF6B35;
+    --accent-hover: #FF8254;
+    --accent-danger: #FF3B3B;
+    --accent-warning: #F59E0B;
+    --accent-success: #22C55E;
+    --accent-glow: rgba(255, 107, 53, 0.12);
+  }
+}
+
+@theme {
+  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+
+  --color-cmd-bg: var(--bg);
+  --color-cmd-surface: var(--surface);
+  --color-cmd-surface-hover: var(--surface-hover);
+  --color-cmd-border: var(--border);
+  --color-cmd-text: var(--text);
+  --color-cmd-muted: var(--text-muted);
+  --color-cmd-accent: var(--accent);
+  --color-cmd-danger: var(--accent-danger);
+  --color-cmd-warning: var(--accent-warning);
+  --color-cmd-success: var(--accent-success);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Monospace telemetry utility styling */
+.font-telemetry {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Tactical radar sweep line animation */
+@keyframes radar-sweep {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.animate-radar-line {
+  animation: radar-sweep 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Radar rotation sweep for indicator */
+@keyframes radar-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-radar-spin {
+  animation: radar-spin 6s linear infinite;
+}
+
+/* Trajectory Polyline Pulse Animation */
+@keyframes polyline-dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.animate-trajectory-dash {
+  stroke-dasharray: 8, 8;
+  animation: polyline-dash 1.5s linear infinite;
+}
+
+/* Tactical Leaflet Popups & Tooltips styling */
+.leaflet-popup-content-wrapper {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.leaflet-tooltip {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 3px !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 11px !important;
+  padding: 3px 6px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+}
+
+/* Custom scrollbar for control room tables & panels */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
